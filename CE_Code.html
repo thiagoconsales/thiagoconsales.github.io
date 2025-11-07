@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Código Diário</title>
+
+<!-- Ícone para tela inicial do iPhone -->
+<link rel="apple-touch-icon" href="https://img.icons8.com/fluency/96/code.png">
+
+<style>
+  /* Layout geral */
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 96px;
+    margin: 0 0 20px 0;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  button {
+    padding: 15px 50px;
+    font-size: 24px;
+    border-radius: 15px;
+    border: none;
+    background-color: #FF9500;
+    color: white;
+    font-weight: bold;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  footer {
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<h1 id="codigo">----</h1>
+<p>Seu código diário</p>
+<button onclick="gerarCodigo()">Atualizar</button>
+
+<footer>Abra no Safari e adicione à tela inicial para usar como app</footer>
+
+<script>
+function gerarCodigo() {
+    const num = 2;
+    const baseDate = new Date(Date.UTC(2000,0,1,0,0,0));
+    const today = new Date();
+    const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+    
+    // Simula ToFileTimeUtc do C#
+    const fileTime = d => (d.getTime() + 11644473600000) * 10000;
+
+    let codigo = String((fileTime(todayUTC) - fileTime(baseDate)) * num);
+    codigo = codigo.substr(3,4);
+
+    document.getElementById('codigo').innerText = codigo;
+}
+
+// Gera automaticamente ao carregar a página
+gerarCodigo();
+</script>
+
+</body>
+</html>
